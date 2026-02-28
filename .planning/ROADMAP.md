@@ -7,7 +7,7 @@ Build an automated content pipeline that researches PUM's activities, generates 
 ## Phases
 
 - [x] **Phase 1: Foundation & Brand Setup** - Project structure, dependencies, brand config, and assets
-- [ ] **Phase 2: Image Template Engine** - Pillow-based branded image generation with 3 templates
+- [x] **Phase 2: Image Template Engine** - Pillow-based branded image generation with 3 templates
 - [ ] **Phase 3: AI Content Generation** - Gemini API integration for research-first bilingual content
 - [ ] **Phase 4: Content Research Sources** - pum.nl scraper, RSS parser, Google Sheets, content brief
 - [ ] **Phase 5: Email Delivery** - Gmail SMTP with image attachment and formatted caption
@@ -46,9 +46,9 @@ Plans:
 
 Plans:
 - [x] 02-01-PLAN.md — Base template engine with shared layout logic (Wave 1)
-- [ ] 02-02-PLAN.md — Quote/Story template implementation (Wave 2)
-- [ ] 02-03-PLAN.md — Tips/List template implementation (Wave 2)
-- [ ] 02-04-PLAN.md — Impact Stats template + full smoke test (Wave 2)
+- [x] 02-02-PLAN.md — Quote/Story template implementation (Wave 2)
+- [x] 02-03-PLAN.md — Tips/List template implementation (Wave 2)
+- [x] 02-04-PLAN.md — Impact Stats template + full smoke test (Wave 2)
 
 ### Phase 3: AI Content Generation
 **Goal**: Gemini API generates structured content (template type, bilingual captions, hashtags) based on provided context, rotating across 4 content pillars
@@ -127,7 +127,7 @@ Phases 1 first, then 2/3/4 can run in parallel, then 5, then 6.
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Brand Setup | 3/3 | Complete | 2026-02-28 |
-| 2. Image Template Engine | 1/4 | In Progress | - |
+| 2. Image Template Engine | 4/4 | Complete | 2026-02-28 |
 | 3. AI Content Generation | 0/3 | Not started | - |
 | 4. Content Research Sources | 0/4 | Not started | - |
 | 5. Email Delivery | 0/2 | Not started | - |
