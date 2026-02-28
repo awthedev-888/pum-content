@@ -27,9 +27,9 @@ Build an automated content pipeline that researches PUM's activities, generates 
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Project structure and dependencies
-- [ ] 01-02: Brand config schema and YAML file
-- [ ] 01-03: Asset preparation (logo, fonts, icons)
+- [ ] 01-01-PLAN.md — Project structure, dependencies, .gitignore, .env.example
+- [ ] 01-02-PLAN.md — Brand asset preparation (logos, icons, decorations, fonts)
+- [ ] 01-03-PLAN.md — Brand config YAML and verification test script
 
 ### Phase 2: Image Template Engine
 **Goal**: Pillow generates 3 types of branded 1080x1080 Instagram post images with PUM brand identity, logo watermark, and dynamic backgrounds
