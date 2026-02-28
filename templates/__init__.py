@@ -6,5 +6,6 @@ canvas creation, gradient backgrounds, watermark placement, and text utilities.
 """
 
 from templates.base import BaseTemplate
+from templates.quote_story import QuoteStoryTemplate
 
-__all__ = ["BaseTemplate"]
+__all__ = ["BaseTemplate", "QuoteStoryTemplate"]
