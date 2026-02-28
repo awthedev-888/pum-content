@@ -11,7 +11,7 @@
 - [x] **RSRCH-02**: System parses PUM blog RSS feed for recent articles
 - [x] **RSRCH-03**: System reads content brief YAML file for manual story ideas, stats, and events
 - [x] **RSRCH-04**: System reads content inputs from a shared Google Sheet
-- [ ] **RSRCH-05**: System searches the internet (via Gemini grounding) for recent PUM Indonesia news
+- [x] **RSRCH-05**: System searches the internet (via Gemini grounding) for recent PUM Indonesia news
 
 ### AI Generation
 
@@ -80,7 +80,7 @@
 | RSRCH-02 | Phase 4 | Complete |
 | RSRCH-03 | Phase 4 | Complete |
 | RSRCH-04 | Phase 4 | Complete |
-| RSRCH-05 | Phase 4 | Pending |
+| RSRCH-05 | Phase 4 | Complete |
 | AIGEN-01 | Phase 3 | Complete |
 | AIGEN-02 | Phase 3 | Complete |
 | AIGEN-03 | Phase 3 | Complete |
