@@ -63,8 +63,8 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Gemini API client and prompt engineering
-- [ ] 03-02: Content pillar rotation and template selection logic
+- [x] 03-01: Gemini API client and prompt engineering
+- [x] 03-02: Content pillar rotation and template selection logic
 - [ ] 03-03: Structured output parsing and validation
 
 ### Phase 4: Content Research Sources
@@ -128,7 +128,7 @@ Phases 1 first, then 2/3/4 can run in parallel, then 5, then 6.
 |-------|----------------|--------|-----------|
 | 1. Foundation & Brand Setup | 3/3 | Complete | 2026-02-28 |
 | 2. Image Template Engine | 4/4 | Complete | 2026-02-28 |
-| 3. AI Content Generation | 0/3 | Not started | - |
+| 3. AI Content Generation | 2/3 | In Progress | - |
 | 4. Content Research Sources | 0/4 | Not started | - |
 | 5. Email Delivery | 0/2 | Not started | - |
 | 6. Orchestration & CI/CD | 0/3 | Not started | - |

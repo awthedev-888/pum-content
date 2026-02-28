@@ -15,9 +15,9 @@
 
 ### AI Generation
 
-- [ ] **AIGEN-01**: Gemini generates captions based on researched content (never from nothing)
-- [ ] **AIGEN-02**: Captions are bilingual — Bahasa Indonesia primary, English secondary
-- [ ] **AIGEN-03**: Gemini generates relevant hashtags for each post
+- [x] **AIGEN-01**: Gemini generates captions based on researched content (never from nothing)
+- [x] **AIGEN-02**: Captions are bilingual — Bahasa Indonesia primary, English secondary
+- [x] **AIGEN-03**: Gemini generates relevant hashtags for each post
 - [x] **AIGEN-04**: Content rotates daily across 4 pillars: success stories, expert tips, impact stats, event promos
 - [x] **AIGEN-05**: Gemini selects appropriate template type based on content pillar
 
@@ -81,9 +81,9 @@
 | RSRCH-03 | Phase 4 | Pending |
 | RSRCH-04 | Phase 4 | Pending |
 | RSRCH-05 | Phase 4 | Pending |
-| AIGEN-01 | Phase 3 | Pending |
-| AIGEN-02 | Phase 3 | Pending |
-| AIGEN-03 | Phase 3 | Pending |
+| AIGEN-01 | Phase 3 | Complete |
+| AIGEN-02 | Phase 3 | Complete |
+| AIGEN-03 | Phase 3 | Complete |
 | AIGEN-04 | Phase 3 | Complete |
 | AIGEN-05 | Phase 3 | Complete |
 | IMG-01 | Phase 2 | Complete |
