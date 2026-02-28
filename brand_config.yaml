@@ -1,0 +1,70 @@
+# PUM Indonesia Content Generator - Brand Configuration
+# Source: PUM Canva Premium Brand Kit
+
+brand:
+  name: "PUM Netherlands Senior Experts"
+  slogan: "Together we grow"
+
+colors:
+  primary:
+    mint_green: "#D2E8D7"
+    dark_green: "#0E5555"
+    orange: "#FF6900"
+  secondary:
+    blue: "#659BD1"
+    warm_brown: "#D69A5F"
+    soft_gold: "#E9C779"
+    light_beige: "#F8E3B3"
+
+fonts:
+  heading:
+    file: "assets/fonts/NotoSans-Bold.ttf"
+    weight: 700
+  body:
+    file: "assets/fonts/NotoSans-Regular.ttf"
+    weight: 400
+  decorative:
+    file: "assets/fonts/PermanentMarker-Regular.ttf"
+
+logos:
+  primary: "assets/logos/PUM_logo-donkergroen-rgb.png"
+  white_with_slogan: "assets/logos/PUM_logo-slogan-alternatief-wit-rgb_1.png"
+
+icons:
+  directory: "assets/icons/"
+  sectors:
+    agriculture: "Agriculture & Beekeeping.png"
+    animal_feed: "Animal Feed, Poultry, Fish and Pigs.png"
+    bakery: "Bakery.png"
+    bso: "BSO & Social Dialogue.png"
+    construction: "Construction.png"
+    education: "Educational Institutes.png"
+    energy: "Energy.png"
+    finance_it: "Finance & IT.png"
+    food_beverage: "Food & Beverage Processing.png"
+    healthcare: "Healthcare.png"
+    horticulture: "Horticulture.png"
+    hospitality: "Hospitality & Tourism.png"
+    ict: "ICT & Incubators.png"
+    management: "Management Consultancy.png"
+    manufacturing: "Manufacturing.png"
+    marketing: "Marketing & Sales.png"
+    milk_meat: "Milk & Meat processing.png"
+    personal_care: "Personal Care.png"
+    ruminants: "Ruminants.png"
+    textiles: "Textiles & Handicrafts.png"
+    value_chain: "Value Chain Management.png"
+    water_waste: "Watr, Waste & Environment.png"
+  priority_indonesia:
+    - agriculture
+    - food_beverage
+    - hospitality
+    - manufacturing
+    - education
+
+decorations:
+  directory: "assets/decorations/"
+  krabbelbabbel:
+    - "KrabbelBabbel-Extra-01.png"
+    - "KrabbelBabbel-Extra-01 (1).png"
+    - "KrabbelBabbel-Extra-01 (2).png"
