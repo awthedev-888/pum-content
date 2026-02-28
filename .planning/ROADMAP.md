@@ -78,13 +78,12 @@ Plans:
   4. Google Sheets reader fetches content inputs from shared spreadsheet
   5. Gemini grounding returns recent PUM Indonesia web results
   6. If any source fails, pipeline continues with remaining sources
-**Plans**: 4 plans
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: pum.nl web scraper
-- [ ] 04-02: RSS feed parser
-- [ ] 04-03: Google Sheets reader with service account auth
-- [ ] 04-04: Content brief file loader and Gemini web search
+- [ ] 04-01: pum.nl web scraper + RSS feed parser (Wave 1)
+- [ ] 04-02: Content brief YAML loader + Google Sheets reader (Wave 1)
+- [ ] 04-03: Gemini web search + source aggregator + integration tests (Wave 2)
 
 ### Phase 5: Email Delivery
 **Goal**: Generated post (image + caption + hashtags + posting suggestion) is delivered via email ready to copy-paste and post

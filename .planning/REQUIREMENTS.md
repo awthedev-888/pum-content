@@ -7,8 +7,8 @@
 
 ### Content Research
 
-- [ ] **RSRCH-01**: System scrapes pum.nl for latest news, stories, and updates
-- [ ] **RSRCH-02**: System parses PUM blog RSS feed for recent articles
+- [x] **RSRCH-01**: System scrapes pum.nl for latest news, stories, and updates
+- [x] **RSRCH-02**: System parses PUM blog RSS feed for recent articles
 - [ ] **RSRCH-03**: System reads content brief YAML file for manual story ideas, stats, and events
 - [ ] **RSRCH-04**: System reads content inputs from a shared Google Sheet
 - [ ] **RSRCH-05**: System searches the internet (via Gemini grounding) for recent PUM Indonesia news
@@ -76,8 +76,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RSRCH-01 | Phase 4 | Pending |
-| RSRCH-02 | Phase 4 | Pending |
+| RSRCH-01 | Phase 4 | Complete |
+| RSRCH-02 | Phase 4 | Complete |
 | RSRCH-03 | Phase 4 | Pending |
 | RSRCH-04 | Phase 4 | Pending |
 | RSRCH-05 | Phase 4 | Pending |
