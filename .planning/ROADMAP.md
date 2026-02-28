@@ -45,7 +45,7 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Base template engine with shared layout logic (Wave 1)
+- [x] 02-01-PLAN.md — Base template engine with shared layout logic (Wave 1)
 - [ ] 02-02-PLAN.md — Quote/Story template implementation (Wave 2)
 - [ ] 02-03-PLAN.md — Tips/List template implementation (Wave 2)
 - [ ] 02-04-PLAN.md — Impact Stats template + full smoke test (Wave 2)
@@ -127,7 +127,7 @@ Phases 1 first, then 2/3/4 can run in parallel, then 5, then 6.
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Brand Setup | 3/3 | Complete | 2026-02-28 |
-| 2. Image Template Engine | 0/4 | Not started | - |
+| 2. Image Template Engine | 1/4 | In Progress | - |
 | 3. AI Content Generation | 0/3 | Not started | - |
 | 4. Content Research Sources | 0/4 | Not started | - |
 | 5. Email Delivery | 0/2 | Not started | - |

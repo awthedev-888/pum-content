@@ -23,12 +23,12 @@
 
 ### Image Generation
 
-- [ ] **IMG-01**: System generates 1080x1080 branded Instagram images using Pillow
+- [x] **IMG-01**: System generates 1080x1080 branded Instagram images using Pillow
 - [x] **IMG-02**: Brand config YAML file defines colors, fonts, and logo path
 - [ ] **IMG-03**: 3 template types: Quote/Story, Tips/List, Impact Stats
-- [ ] **IMG-04**: PUM logo watermark on every generated image
-- [ ] **IMG-05**: Templates use PUM brand kit colors, fonts, and icons
-- [ ] **IMG-06**: Templates include dynamic background patterns or gradients
+- [x] **IMG-04**: PUM logo watermark on every generated image
+- [x] **IMG-05**: Templates use PUM brand kit colors, fonts, and icons
+- [x] **IMG-06**: Templates include dynamic background patterns or gradients
 
 ### Email Delivery
 
@@ -86,12 +86,12 @@
 | AIGEN-03 | Phase 3 | Pending |
 | AIGEN-04 | Phase 3 | Pending |
 | AIGEN-05 | Phase 3 | Pending |
-| IMG-01 | Phase 2 | Pending |
+| IMG-01 | Phase 2 | Complete |
 | IMG-02 | Phase 1 | Complete |
 | IMG-03 | Phase 2 | Pending |
-| IMG-04 | Phase 2 | Pending |
-| IMG-05 | Phase 2 | Pending |
-| IMG-06 | Phase 2 | Pending |
+| IMG-04 | Phase 2 | Complete |
+| IMG-05 | Phase 2 | Complete |
+| IMG-06 | Phase 2 | Complete |
 | EMAIL-01 | Phase 5 | Pending |
 | EMAIL-02 | Phase 5 | Pending |
 | EMAIL-03 | Phase 5 | Pending |
