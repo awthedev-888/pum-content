@@ -27,7 +27,7 @@ Build an automated content pipeline that researches PUM's activities, generates 
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project structure, dependencies, .gitignore, .env.example
+- [x] 01-01-PLAN.md — Project structure, dependencies, .gitignore, .env.example
 - [ ] 01-02-PLAN.md — Brand asset preparation (logos, icons, decorations, fonts)
 - [ ] 01-03-PLAN.md — Brand config YAML and verification test script
 
@@ -126,7 +126,7 @@ Phases 1 first, then 2/3/4 can run in parallel, then 5, then 6.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Brand Setup | 0/3 | Not started | - |
+| 1. Foundation & Brand Setup | 1/3 | In Progress | - |
 | 2. Image Template Engine | 0/4 | Not started | - |
 | 3. AI Content Generation | 0/3 | Not started | - |
 | 4. Content Research Sources | 0/4 | Not started | - |

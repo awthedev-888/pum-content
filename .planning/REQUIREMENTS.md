@@ -39,7 +39,7 @@
 ### Infrastructure
 
 - [ ] **INFRA-01**: GitHub Actions cron triggers pipeline daily
-- [ ] **INFRA-02**: All secrets (API keys, passwords) stored as GitHub Actions secrets
+- [x] **INFRA-02**: All secrets (API keys, passwords) stored as GitHub Actions secrets
 - [ ] **INFRA-03**: Pipeline handles errors gracefully and logs failures
 
 ## v2 Requirements
@@ -96,7 +96,7 @@
 | EMAIL-02 | Phase 5 | Pending |
 | EMAIL-03 | Phase 5 | Pending |
 | INFRA-01 | Phase 6 | Pending |
-| INFRA-02 | Phase 1 | Pending |
+| INFRA-02 | Phase 1 | Complete |
 | INFRA-03 | Phase 6 | Pending |
 
 **Coverage:**
