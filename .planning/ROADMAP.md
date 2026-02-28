@@ -45,10 +45,10 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 02-01: Base template engine with shared layout logic
-- [ ] 02-02: Quote/Story template implementation
-- [ ] 02-03: Tips/List template implementation
-- [ ] 02-04: Impact Stats template implementation
+- [ ] 02-01-PLAN.md — Base template engine with shared layout logic (Wave 1)
+- [ ] 02-02-PLAN.md — Quote/Story template implementation (Wave 2)
+- [ ] 02-03-PLAN.md — Tips/List template implementation (Wave 2)
+- [ ] 02-04-PLAN.md — Impact Stats template + full smoke test (Wave 2)
 
 ### Phase 3: AI Content Generation
 **Goal**: Gemini API generates structured content (template type, bilingual captions, hashtags) based on provided context, rotating across 4 content pillars
