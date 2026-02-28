@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-last_updated: "2026-02-28T11:31:34Z"
+last_updated: "2026-02-28T11:32:10Z"
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 19
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State
@@ -23,28 +23,28 @@ See: .planning/PROJECT.md (updated 2026-02-28)
 ## Current Position
 
 Phase: 2 of 6 (Image Template Engine)
-Plan: 2 of 4 in current phase
+Plan: 3 of 4 in current phase
 Status: In Progress
-Last activity: 2026-02-28 — Completed 02-02-PLAN.md (QuoteStoryTemplate for branded story posts)
+Last activity: 2026-02-28 — Completed 02-03-PLAN.md (TipsListTemplate for branded tips/list posts)
 
-Progress: ██▓░░░░░░░ 26%
+Progress: ███░░░░░░░ 32%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 2.6min
-- Total execution time: 0.22 hours
+- Total plans completed: 6
+- Average duration: 2.5min
+- Total execution time: 0.25 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1. Foundation & Brand Setup | 3 | 7min | 2.3min |
-| 2. Image Template Engine | 2 | 6min | 3min |
+| 2. Image Template Engine | 3 | 8min | 2.7min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (2min), 01-02 (3min), 01-03 (2min), 02-01 (4min), 02-02 (2min)
+- Last 5 plans: 01-02 (3min), 01-03 (2min), 02-01 (4min), 02-02 (2min), 02-03 (2min)
 - Trend: Consistent
 
 *Updated after each plan completion*
@@ -70,6 +70,8 @@ Recent decisions affecting current work:
 - Text color adapts to gradient brightness: white on dark, dark green on light
 - Adaptive body font sizing (28px down to 20px in 2px steps) prevents text overflow
 - KrabbelBabbel decoration positioned in corners to avoid text overlap
+- Tips/list badge: 40px orange circle with 22px white number centered via anchor="mm"
+- Adaptive item sizing: body font 26px->20px, spacing 30px->15px when items overflow
 
 ### Pending Todos
 
@@ -82,5 +84,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-28
-Stopped at: Completed 02-02-PLAN.md (QuoteStoryTemplate for branded story posts)
-Resume file: .planning/phases/02-image-template-engine/02-02-SUMMARY.md
+Stopped at: Completed 02-03-PLAN.md (TipsListTemplate for branded tips/list posts)
+Resume file: .planning/phases/02-image-template-engine/02-03-SUMMARY.md
