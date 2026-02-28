@@ -1,0 +1,29 @@
+# PUM Indonesia Content Brief
+# Manual story ideas, statistics, and upcoming events for content generation.
+# Update this file with fresh content weekly.
+
+story_ideas:
+  - title: "Batik entrepreneur scales production with PUM expert guidance"
+    description: "A batik SME in Yogyakarta doubled output after PUM textile expert helped optimize workshop layout and introduce quality control processes."
+  - title: "Sustainable fishing practices in Sulawesi"
+    description: "PUM aquaculture expert helped fishing cooperative adopt sustainable harvesting methods, improving both yield and ocean health."
+  - title: "Digital transformation for traditional market vendors"
+    description: "PUM IT expert trained Pasar Baru vendors in Bandung on digital payments and online ordering systems."
+
+stats:
+  - number: "200+"
+    context: "SMEs supported across Indonesia"
+  - number: "35"
+    context: "expert missions completed in 2025"
+  - number: "12"
+    context: "provinces reached by PUM programs"
+  - number: "89%"
+    context: "of SMEs report improved business performance"
+
+events:
+  - name: "PUM Indonesia SME Summit"
+    date: "2026-04-15"
+    details: "Annual summit in Jakarta bringing together PUM experts and Indonesian entrepreneurs"
+  - name: "Sustainable Agriculture Workshop"
+    date: "2026-05-20"
+    details: "Expert-led workshop on sustainable farming practices in East Java"
