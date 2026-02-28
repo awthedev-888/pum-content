@@ -76,34 +76,34 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RSRCH-01 | — | Pending |
-| RSRCH-02 | — | Pending |
-| RSRCH-03 | — | Pending |
-| RSRCH-04 | — | Pending |
-| RSRCH-05 | — | Pending |
-| AIGEN-01 | — | Pending |
-| AIGEN-02 | — | Pending |
-| AIGEN-03 | — | Pending |
-| AIGEN-04 | — | Pending |
-| AIGEN-05 | — | Pending |
-| IMG-01 | — | Pending |
-| IMG-02 | — | Pending |
-| IMG-03 | — | Pending |
-| IMG-04 | — | Pending |
-| IMG-05 | — | Pending |
-| IMG-06 | — | Pending |
-| EMAIL-01 | — | Pending |
-| EMAIL-02 | — | Pending |
-| EMAIL-03 | — | Pending |
-| INFRA-01 | — | Pending |
-| INFRA-02 | — | Pending |
-| INFRA-03 | — | Pending |
+| RSRCH-01 | Phase 4 | Pending |
+| RSRCH-02 | Phase 4 | Pending |
+| RSRCH-03 | Phase 4 | Pending |
+| RSRCH-04 | Phase 4 | Pending |
+| RSRCH-05 | Phase 4 | Pending |
+| AIGEN-01 | Phase 3 | Pending |
+| AIGEN-02 | Phase 3 | Pending |
+| AIGEN-03 | Phase 3 | Pending |
+| AIGEN-04 | Phase 3 | Pending |
+| AIGEN-05 | Phase 3 | Pending |
+| IMG-01 | Phase 2 | Pending |
+| IMG-02 | Phase 1 | Pending |
+| IMG-03 | Phase 2 | Pending |
+| IMG-04 | Phase 2 | Pending |
+| IMG-05 | Phase 2 | Pending |
+| IMG-06 | Phase 2 | Pending |
+| EMAIL-01 | Phase 5 | Pending |
+| EMAIL-02 | Phase 5 | Pending |
+| EMAIL-03 | Phase 5 | Pending |
+| INFRA-01 | Phase 6 | Pending |
+| INFRA-02 | Phase 1 | Pending |
+| INFRA-03 | Phase 6 | Pending |
 
 **Coverage:**
 - v1 requirements: 22 total
-- Mapped to phases: 0
-- Unmapped: 22 ⚠️
+- Mapped to phases: 22
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-02-28*
-*Last updated: 2026-02-28 after initial definition*
+*Last updated: 2026-02-28 after roadmap creation*
