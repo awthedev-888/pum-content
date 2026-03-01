@@ -33,8 +33,8 @@
 ### Email Delivery
 
 - [x] **EMAIL-01**: System sends email with generated post image as attachment
-- [ ] **EMAIL-02**: Email body contains ready-to-copy bilingual caption and hashtags
-- [ ] **EMAIL-03**: Email includes posting suggestion (time and content theme)
+- [x] **EMAIL-02**: Email body contains ready-to-copy bilingual caption and hashtags
+- [x] **EMAIL-03**: Email includes posting suggestion (time and content theme)
 
 ### Infrastructure
 
@@ -93,8 +93,8 @@
 | IMG-05 | Phase 2 | Complete |
 | IMG-06 | Phase 2 | Complete |
 | EMAIL-01 | Phase 5 | Complete |
-| EMAIL-02 | Phase 5 | Pending |
-| EMAIL-03 | Phase 5 | Pending |
+| EMAIL-02 | Phase 5 | Complete |
+| EMAIL-03 | Phase 5 | Complete |
 | INFRA-01 | Phase 6 | Pending |
 | INFRA-02 | Phase 1 | Complete |
 | INFRA-03 | Phase 6 | Pending |
