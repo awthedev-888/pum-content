@@ -18,23 +18,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-02-28)
 
 **Core value:** Consistent, research-backed branded content delivered daily to email — so the PUM Indonesia team just reviews, copies, and posts in 30 seconds.
-**Current focus:** Phase 6 in progress — Orchestration & CI/CD. Plan 01 (Pipeline orchestrator) complete.
+**Current focus:** Phase 6 in progress — Orchestration & CI/CD. Plan 02 (GitHub Actions workflow) complete.
 
 ## Current Position
 
 Phase: 6 of 6 (Orchestration & CI/CD)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: Executing Phase 06
-Last activity: 2026-03-01 — Completed 06-01-PLAN.md (Pipeline orchestrator)
+Last activity: 2026-03-01 — Completed 06-02-PLAN.md (GitHub Actions workflow)
 
-Progress: ████████░░ 89%
+Progress: █████████░ 94%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 16
-- Average duration: 2.5min
-- Total execution time: 0.64 hours
+- Total plans completed: 17
+- Average duration: 2.4min
+- Total execution time: 0.66 hours
 
 **By Phase:**
 
@@ -45,10 +45,10 @@ Progress: ████████░░ 89%
 | 3. AI Content Generation | 3/3 | 6min | 2.0min |
 | 4. Content Research Sources | 3/3 | 10min | 3.3min |
 | 5. Email Delivery | 2/2 | 6min | 3.0min |
-| 6. Orchestration & CI/CD | 1/3 | 1min | 1.0min |
+| 6. Orchestration & CI/CD | 2/3 | 2min | 1.0min |
 
 **Recent Trend:**
-- Last 5 plans: 04-02 (4min), 04-03 (3min), 05-01 (3min), 05-02 (3min), 06-01 (1min)
+- Last 5 plans: 04-03 (3min), 05-01 (3min), 05-02 (3min), 06-01 (1min), 06-02 (1min)
 - Trend: Consistent
 
 *Updated after each plan completion*
@@ -60,6 +60,7 @@ Progress: ████████░░ 89%
 | Phase 05 P01 | 3min | 2 tasks | 3 files |
 | Phase 05 P02 | 3min | 2 tasks | 3 files |
 | Phase 06 P01 | 1min | 1 tasks | 1 files |
+| Phase 06 P02 | 1min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -113,6 +114,10 @@ Recent decisions affecting current work:
 - [Phase 06]: Deferred module imports inside try blocks for clean error isolation
 - [Phase 06]: Dictionary dispatch for template type mapping instead of if/elif chain
 - [Phase 06]: run_pipeline() returns bool so tests can verify flow without intercepting sys.exit
+- [Phase 06]: Cron at 00:00 UTC (07:00 WIB) for morning content delivery
+- [Phase 06]: Secrets injected only in pipeline step, not globally, to limit exposure
+- [Phase 06]: Python 3.11 in CI (vs 3.9 locally) for better performance
+- [Phase 06]: 10-minute timeout prevents runaway GitHub Actions minutes
 
 ### Pending Todos
 
@@ -125,5 +130,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Completed 06-01-PLAN.md (Pipeline orchestrator)
-Resume file: .planning/phases/06-orchestration-ci-cd/06-01-SUMMARY.md
+Stopped at: Completed 06-02-PLAN.md (GitHub Actions workflow)
+Resume file: .planning/phases/06-orchestration-ci-cd/06-02-SUMMARY.md

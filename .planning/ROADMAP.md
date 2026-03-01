@@ -115,7 +115,7 @@ Plans:
 
 Plans:
 - [ ] 06-01-PLAN.md — Main orchestrator script (main.py) with 4-stage pipeline (Wave 1)
-- [ ] 06-02-PLAN.md — GitHub Actions workflow with daily cron (Wave 1)
+- [x] 06-02-PLAN.md — GitHub Actions workflow with daily cron (Wave 1)
 - [ ] 06-03-PLAN.md — Offline test suite for orchestrator (Wave 2)
 
 ## Progress
@@ -130,4 +130,4 @@ Phases 1 first, then 2/3/4 can run in parallel, then 5, then 6.
 | 3. AI Content Generation | 2/3 | In Progress | - |
 | 4. Content Research Sources | 0/4 | Not started | - |
 | 5. Email Delivery | 0/2 | Complete    | 2026-03-01 |
-| 6. Orchestration & CI/CD | 0/3 | Not started | - |
+| 6. Orchestration & CI/CD | 2/3 | In Progress | - |
