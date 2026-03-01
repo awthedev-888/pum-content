@@ -2,16 +2,17 @@
 
 Provides canvas creation, gradient backgrounds, dynamic background patterns,
 logo watermark placement, KrabbelBabbel decoration overlays, pixel-based text
-wrapping, and font/color access. All template subclasses inherit from this class.
+wrapping, font/color access, and the 3-zone layout system (headline / photo / CTA).
 
 Usage:
     from templates.base import BaseTemplate
 
     class MyTemplate(BaseTemplate):
-        def render(self, data):
+        def render(self, data, photo=None):
             img = self.create_canvas()
-            img = self.draw_gradient(img, *self.random_gradient())
-            img = self.add_watermark(img)
+            img, bg = self.draw_headline_zone(img, "Bersama\\nKita Tumbuh")
+            img = self.draw_photo_zone(img, photo=photo)
+            img = self.draw_cta_banner(img, "TOGETHER WE GROW")
             return img
 """
 
@@ -27,14 +28,20 @@ class BaseTemplate:
 
     Handles brand config loading, canvas creation, gradient backgrounds,
     dynamic background patterns, logo watermark placement, KrabbelBabbel
-    decoration overlays, text wrapping, and font/color access.
+    decoration overlays, text wrapping, font/color access, and the 3-zone
+    layout system matching @pum_nl Instagram style.
     """
 
     # Canvas dimensions (Instagram square post)
     WIDTH = 1080
     HEIGHT = 1080
 
-    # Layout zones
+    # 3-zone layout heights
+    HEADLINE_ZONE_HEIGHT = 378   # ~35%
+    PHOTO_ZONE_HEIGHT = 486      # ~45%
+    CTA_ZONE_HEIGHT = 216        # ~20%
+
+    # Legacy layout zones (kept for backward compat)
     MARGIN = 80
     CONTENT_WIDTH = 920  # WIDTH - 2 * MARGIN
     HEADER_TOP = 80
@@ -69,6 +76,18 @@ class BaseTemplate:
         ("#0E5555", "#659BD1"),  # dark green -> blue
         ("#D69A5F", "#F8E3B3"),  # warm brown -> beige
     ]
+
+    # Headline zone background color rotation
+    HEADLINE_BG_COLORS = [
+        "#0E5555",  # dark teal
+        "#D2E8D7",  # light mint
+        "#F8E3B3",  # light beige
+    ]
+
+    # Bracket decoration constants
+    BRACKET_LENGTH = 40
+    BRACKET_THICKNESS = 3
+    BRACKET_INSET = 20  # how far from photo zone edges
 
     def __init__(self, config_path=None):
         """Initialize BaseTemplate with brand config and assets.
@@ -140,6 +159,265 @@ class BaseTemplate:
             deco = Image.open(str(deco_dir / deco_file)).convert("RGBA")
             self.decorations.append(deco)
 
+    # ── 3-Zone Layout Methods ───────────────────────────────────────────
+
+    def draw_headline_zone(self, img, headline_text, bg_color=None):
+        """Draw the top headline zone with solid color, bold text, and KrabbelBabbel mark.
+
+        Args:
+            img: PIL Image (1080x1080 RGBA).
+            headline_text: Short headline, may contain \\n for line breaks.
+            bg_color: Hex color for zone background. If None, randomly chosen.
+
+        Returns:
+            Tuple of (modified PIL Image, bg_color used).
+        """
+        if bg_color is None:
+            bg_color = random.choice(self.HEADLINE_BG_COLORS)
+
+        # Draw solid color block
+        draw = ImageDraw.Draw(img)
+        draw.rectangle(
+            [(0, 0), (self.WIDTH, self.HEADLINE_ZONE_HEIGHT)],
+            fill=bg_color,
+        )
+
+        # Determine text color based on background brightness
+        is_dark = self._is_dark_color(bg_color)
+        text_color = "#FFFFFF" if is_dark else "#0E5555"
+
+        # Draw headline text
+        headline_font = self.get_font("heading", 56)
+        lines = headline_text.split("\\n") if "\\n" in headline_text else [headline_text]
+
+        line_height = headline_font.getbbox("Ag")[3]
+        total_text_height = len(lines) * line_height + (len(lines) - 1) * 12
+        start_y = (self.HEADLINE_ZONE_HEIGHT - total_text_height) // 2
+
+        text_x = self.MARGIN
+        current_y = start_y
+        max_text_width = 0
+
+        for line in lines:
+            draw.text((text_x, current_y), line, fill=text_color, font=headline_font)
+            line_width = headline_font.getlength(line)
+            max_text_width = max(max_text_width, line_width)
+            current_y += line_height + 12
+
+        # KrabbelBabbel mark beside headline (prominent, ~85% opacity)
+        if self.decorations:
+            deco_index = random.randint(0, len(self.decorations) - 1)
+            deco_size = 120
+            deco_x = int(text_x + max_text_width + 30)
+            # Clamp to canvas
+            if deco_x + deco_size > self.WIDTH - 20:
+                deco_x = self.WIDTH - deco_size - 20
+            deco_y = (self.HEADLINE_ZONE_HEIGHT - deco_size) // 2
+            img = self.add_decoration(
+                img,
+                deco_index=deco_index,
+                position=(deco_x, deco_y),
+                size=deco_size,
+                opacity=0.85,
+            )
+
+        # Orange underline accent under last line of headline
+        underline_y = current_y - 4
+        underline_width = min(int(max_text_width * 0.6), 300)
+        draw = ImageDraw.Draw(img)  # refresh after decoration composite
+        draw.rectangle(
+            [(text_x, underline_y), (text_x + underline_width, underline_y + 4)],
+            fill="#FF6900",
+        )
+
+        return img, bg_color
+
+    def draw_photo_zone(self, img, photo=None, sector=None):
+        """Draw the middle photo zone with photo or gradient fallback.
+
+        Args:
+            img: PIL Image (1080x1080 RGBA).
+            photo: PIL Image for the photo, or None for fallback.
+            sector: Sector key for fallback icon (e.g., "agriculture").
+
+        Returns:
+            Modified PIL Image.
+        """
+        zone_top = self.HEADLINE_ZONE_HEIGHT
+        zone_width = self.WIDTH
+        zone_height = self.PHOTO_ZONE_HEIGHT
+
+        if photo is not None:
+            from content_generator.photo_service import crop_to_zone
+            cropped = crop_to_zone(photo, zone_width, zone_height)
+            img.paste(cropped, (0, zone_top))
+        else:
+            img = self._draw_fallback_photo_zone(img, sector)
+
+        # White corner brackets
+        img = self._draw_bracket_decorations(img)
+
+        return img
+
+    def _draw_fallback_photo_zone(self, img, sector=None):
+        """Draw gradient + sector icon fallback when no photo is available.
+
+        Args:
+            img: PIL Image to draw on.
+            sector: Optional sector key for icon overlay.
+
+        Returns:
+            Modified PIL Image.
+        """
+        zone_top = self.HEADLINE_ZONE_HEIGHT
+        zone_height = self.PHOTO_ZONE_HEIGHT
+
+        # Gradient fill in the photo zone
+        c1 = ImageColor.getrgb("#0E5555")
+        c2 = ImageColor.getrgb("#D2E8D7")
+        for y in range(zone_height):
+            t = y / (zone_height - 1) if zone_height > 1 else 0
+            r = int(c1[0] + (c2[0] - c1[0]) * t)
+            g = int(c1[1] + (c2[1] - c1[1]) * t)
+            b = int(c1[2] + (c2[2] - c1[2]) * t)
+            strip = Image.new("RGB", (self.WIDTH, 1), (r, g, b))
+            img.paste(strip, (0, zone_top + y))
+
+        # Add dot pattern to photo zone
+        overlay = Image.new("RGBA", (self.WIDTH, self.HEIGHT), (0, 0, 0, 0))
+        draw_overlay = ImageDraw.Draw(overlay)
+        for x in range(0, self.WIDTH, 60):
+            for y in range(zone_top, zone_top + zone_height, 60):
+                draw_overlay.ellipse(
+                    [(x - 2, y - 2), (x + 2, y + 2)],
+                    fill=(255, 255, 255, 25),
+                )
+        img = Image.alpha_composite(img, overlay)
+
+        # Sector icon at 40% opacity in center of photo zone
+        if sector:
+            icons_config = self.config.get("icons", {})
+            sectors = icons_config.get("sectors", {})
+            icon_filename = sectors.get(sector)
+            if icon_filename:
+                icon_dir = self.project_root / icons_config.get("directory", "assets/icons/")
+                icon_path = icon_dir / icon_filename
+                if icon_path.exists():
+                    icon = Image.open(str(icon_path)).convert("RGBA")
+                    icon_size = 160
+                    aspect = icon.height / icon.width
+                    icon_h = int(icon_size * aspect)
+                    icon = icon.resize((icon_size, icon_h), Image.LANCZOS)
+
+                    # Set opacity to 40%
+                    r_ch, g_ch, b_ch, a_ch = icon.split()
+                    a_ch = a_ch.point(lambda x: int(x * 0.4))
+                    icon = Image.merge("RGBA", (r_ch, g_ch, b_ch, a_ch))
+
+                    icon_x = (self.WIDTH - icon_size) // 2
+                    icon_y = zone_top + (zone_height - icon_h) // 2
+                    img.paste(icon, (icon_x, icon_y), icon)
+
+        return img
+
+    def _draw_bracket_decorations(self, img):
+        """Draw white corner brackets around the photo zone edges.
+
+        Creates L-shaped brackets at each corner of the photo zone, matching
+        PUM's @pum_nl Instagram style.
+
+        Args:
+            img: PIL Image to draw on.
+
+        Returns:
+            Modified PIL Image.
+        """
+        draw = ImageDraw.Draw(img)
+        zone_top = self.HEADLINE_ZONE_HEIGHT
+        zone_bottom = zone_top + self.PHOTO_ZONE_HEIGHT
+        bracket_color = (255, 255, 255, 200)
+        inset = self.BRACKET_INSET
+        length = self.BRACKET_LENGTH
+        thickness = self.BRACKET_THICKNESS
+
+        # Use overlay for semi-transparent brackets
+        overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        od = ImageDraw.Draw(overlay)
+
+        # Top-left bracket
+        od.rectangle([(inset, zone_top + inset), (inset + length, zone_top + inset + thickness)], fill=bracket_color)
+        od.rectangle([(inset, zone_top + inset), (inset + thickness, zone_top + inset + length)], fill=bracket_color)
+
+        # Top-right bracket
+        od.rectangle([(self.WIDTH - inset - length, zone_top + inset), (self.WIDTH - inset, zone_top + inset + thickness)], fill=bracket_color)
+        od.rectangle([(self.WIDTH - inset - thickness, zone_top + inset), (self.WIDTH - inset, zone_top + inset + length)], fill=bracket_color)
+
+        # Bottom-left bracket
+        od.rectangle([(inset, zone_bottom - inset - thickness), (inset + length, zone_bottom - inset)], fill=bracket_color)
+        od.rectangle([(inset, zone_bottom - inset - length), (inset + thickness, zone_bottom - inset)], fill=bracket_color)
+
+        # Bottom-right bracket
+        od.rectangle([(self.WIDTH - inset - length, zone_bottom - inset - thickness), (self.WIDTH - inset, zone_bottom - inset)], fill=bracket_color)
+        od.rectangle([(self.WIDTH - inset - thickness, zone_bottom - inset - length), (self.WIDTH - inset, zone_bottom - inset)], fill=bracket_color)
+
+        return Image.alpha_composite(img, overlay)
+
+    def draw_cta_banner(self, img, cta_text="TOGETHER WE GROW"):
+        """Draw the bottom orange CTA banner with PermanentMarker text and PUM logo.
+
+        Args:
+            img: PIL Image (1080x1080 RGBA).
+            cta_text: CTA text string (ALL CAPS, 2-5 words).
+
+        Returns:
+            Modified PIL Image.
+        """
+        zone_top = self.HEADLINE_ZONE_HEIGHT + self.PHOTO_ZONE_HEIGHT
+        draw = ImageDraw.Draw(img)
+
+        # Orange rectangle
+        draw.rectangle(
+            [(0, zone_top), (self.WIDTH, self.HEIGHT)],
+            fill="#FF6900",
+        )
+
+        # CTA text in PermanentMarker, centered
+        cta_font = self.get_font("decorative", 48)
+        cta_text_upper = cta_text.upper()
+        text_width = cta_font.getlength(cta_text_upper)
+        text_height = cta_font.getbbox("Ag")[3]
+        text_x = (self.WIDTH - text_width) / 2
+        text_y = zone_top + (self.CTA_ZONE_HEIGHT - text_height) / 2 - 10
+
+        draw.text((text_x, text_y), cta_text_upper, fill="#FFFFFF", font=cta_font)
+
+        # Small white PUM logo in bottom-right of CTA zone
+        logo = self.logo_white.copy()
+        logo_width = 80
+        aspect = logo.height / logo.width
+        logo_h = int(logo_width * aspect)
+        logo = logo.resize((logo_width, logo_h), Image.LANCZOS)
+        logo_x = self.WIDTH - logo_width - 30
+        logo_y = self.HEIGHT - logo_h - 20
+        img.paste(logo, (logo_x, logo_y), logo)
+
+        return img
+
+    # ── Legacy Methods (kept for backward compatibility) ────────────────
+
+    def _is_dark_color(self, hex_color):
+        """Check if a hex color is dark based on perceived brightness.
+
+        Args:
+            hex_color: Hex color string (e.g., "#0E5555").
+
+        Returns:
+            True if the color is dark (brightness < 128).
+        """
+        rgb = ImageColor.getrgb(hex_color)
+        brightness = int(0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2])
+        return brightness < 128
+
     def create_canvas(self, bg_color="#D2E8D7"):
         """Create a 1080x1080 RGBA canvas with solid background color.
 
@@ -199,9 +477,6 @@ class BaseTemplate:
     def add_dot_pattern(self, img, color_rgba=(255, 255, 255, 30), spacing=60):
         """Add subtle dot pattern overlay to the image.
 
-        Creates small ellipses (radius 3px) at regular grid spacing on a
-        transparent overlay, then composites onto the image.
-
         Args:
             img: PIL Image (must be RGBA mode).
             color_rgba: RGBA tuple for dot color. Default is white at ~12% opacity.
@@ -227,9 +502,6 @@ class BaseTemplate:
     ):
         """Add subtle diagonal line pattern overlay to the image.
 
-        Draws diagonal lines from top-left to bottom-right at regular spacing
-        on a transparent overlay, then composites onto the image.
-
         Args:
             img: PIL Image (must be RGBA mode).
             color_rgba: RGBA tuple for line color. Default is white at ~8% opacity.
@@ -242,8 +514,6 @@ class BaseTemplate:
         overlay = Image.new("RGBA", (self.WIDTH, self.HEIGHT), (0, 0, 0, 0))
         draw = ImageDraw.Draw(overlay)
 
-        # Draw diagonals covering full canvas. Lines go from top-left to bottom-right.
-        # Start offset range must cover enough to fill the entire canvas.
         total_range = self.WIDTH + self.HEIGHT
         for offset in range(-total_range, total_range, spacing):
             start_x = offset
@@ -259,17 +529,14 @@ class BaseTemplate:
         return Image.alpha_composite(img, overlay)
 
     def add_decoration(self, img, deco_index=0, position=(0, 0), size=200, opacity=0.2):
-        """Add a KrabbelBabbel decoration overlay at reduced opacity.
-
-        Resizes the decoration maintaining aspect ratio, adjusts alpha channel
-        for opacity control, and pastes with alpha mask.
+        """Add a KrabbelBabbel decoration overlay at specified opacity.
 
         Args:
             img: PIL Image to add decoration to.
             deco_index: Index into self.decorations list (0, 1, or 2).
             position: (x, y) tuple for placement.
             size: Target width in pixels (height scales proportionally).
-            opacity: Opacity multiplier (0.0 to 1.0). Default 0.2 (20%).
+            opacity: Opacity multiplier (0.0 to 1.0).
 
         Returns:
             Modified PIL Image with decoration overlay.
@@ -324,10 +591,6 @@ class BaseTemplate:
     def wrap_text(self, text, font, max_width):
         """Word-wrap text to fit within max_width pixels.
 
-        Uses font.getlength() for pixel-accurate measurement instead of
-        character counting. Handles single words longer than max_width by
-        placing them on their own line.
-
         Args:
             text: String to wrap.
             font: PIL ImageFont for pixel measurement.
@@ -360,9 +623,6 @@ class BaseTemplate:
     def get_text_block_height(self, lines, font, line_spacing=10):
         """Calculate total pixel height of a wrapped text block.
 
-        Uses font.getbbox("Ag") to capture both ascender and descender height,
-        which is more accurate than measuring single characters.
-
         Args:
             lines: List of text strings (from wrap_text).
             font: PIL ImageFont for height measurement.
@@ -379,9 +639,6 @@ class BaseTemplate:
 
     def get_font(self, style, size):
         """Load a brand font at a specific size.
-
-        Loads the font file for the requested style and applies correct
-        variable font weight axes.
 
         Args:
             style: "heading", "body", or "decorative".
@@ -420,11 +677,12 @@ class BaseTemplate:
         """
         return self.config["colors"][group][name]
 
-    def render(self, data):
+    def render(self, data, photo=None):
         """Render a template with the given data. Must be overridden by subclasses.
 
         Args:
             data: Dictionary of content data for the template.
+            photo: Optional PIL Image for the photo zone.
 
         Raises:
             NotImplementedError: Always - subclasses must implement this method.

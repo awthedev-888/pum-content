@@ -68,3 +68,36 @@ decorations:
     - "KrabbelBabbel-Extra-01.png"
     - "KrabbelBabbel-Extra-01 (1).png"
     - "KrabbelBabbel-Extra-01 (2).png"
+
+# 3-zone layout configuration (matching @pum_nl Instagram style)
+layout:
+  headline_zone:
+    height_ratio: 0.35
+    height_px: 378
+    bg_colors:
+      - "#0E5555"  # dark teal
+      - "#D2E8D7"  # light mint
+      - "#F8E3B3"  # light beige
+    krabbelbabbel_opacity: 0.85
+  photo_zone:
+    height_ratio: 0.45
+    height_px: 486
+    bracket_color: "#FFFFFF"
+    bracket_opacity: 200
+    fallback_gradient:
+      - "#0E5555"
+      - "#D2E8D7"
+  cta_zone:
+    height_ratio: 0.20
+    height_px: 216
+    bg_color: "#FF6900"
+    text_color: "#FFFFFF"
+    font: "decorative"
+    default_text: "TOGETHER WE GROW"
+
+# CTA text defaults by content pillar
+cta_defaults:
+  success_stories: "READ THE WHOLE STORY"
+  expert_tips: "SHARING KNOWLEDGE"
+  impact_stats: "TOGETHER WE GROW"
+  event_promos: "JOIN US"

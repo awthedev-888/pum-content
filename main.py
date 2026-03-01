@@ -1,6 +1,6 @@
 """PUM Indonesia Content Generator - Main Pipeline Orchestrator.
 
-Runs the complete content pipeline: research -> generate -> render -> email.
+Runs the complete content pipeline: research -> generate -> fetch photo -> render -> email.
 Designed to be called by GitHub Actions cron or manually via python main.py.
 """
 
@@ -14,14 +14,16 @@ from dotenv import load_dotenv
 logger = logging.getLogger(__name__)
 
 
-def render_image(post) -> str:
+def render_image(post, photo=None) -> str:
     """Render a branded image from the generated post data.
 
     Maps post.template_type to the correct template class via dictionary
-    dispatch, renders the image, and saves it to the output directory.
+    dispatch, renders the image with the 3-zone layout, and saves it to
+    the output directory.
 
     Args:
         post: GeneratedPost instance with template_type and template_data.
+        photo: Optional PIL Image for the photo zone.
 
     Returns:
         Path to the saved PNG image.
@@ -42,19 +44,24 @@ def render_image(post) -> str:
         raise ValueError(f"Unknown template type: {post.template_type}")
 
     template = template_class()
-    img = template.render(post.template_data)
+    data = post.template_data if isinstance(post.template_data, dict) else post.template_data.model_dump(exclude_none=True)
+
+    # Pass cta_text from post-level into template data
+    if hasattr(post, "cta_text") and post.cta_text:
+        data["cta_text"] = post.cta_text
+
+    img = template.render(data, photo=photo)
     output_path = f"output/pum_post_{date.today().isoformat()}.png"
     template.save(img, output_path)
     return output_path
 
 
 def run_pipeline() -> bool:
-    """Execute the 4-stage content pipeline.
+    """Execute the 5-stage content pipeline.
 
-    Each stage is wrapped in its own try/except block. If any stage fails,
-    the error is logged and the function returns False immediately (all
-    stages are critical -- downstream stages cannot proceed without
-    upstream output).
+    Each stage is wrapped in its own try/except block. If any critical stage
+    fails, the error is logged and the function returns False immediately.
+    Photo fetching (Stage 2.5) is non-critical and degrades gracefully.
 
     Returns:
         True if all stages succeeded, False if any stage failed.
@@ -91,12 +98,32 @@ def run_pipeline() -> bool:
         logger.error("Stage 2 FAILED - Generation: %s", e)
         return False
 
+    # Stage 2.5: Fetch stock photo (non-critical, graceful degradation)
+    logger.info("=" * 50)
+    logger.info("Stage 2.5: Fetching stock photo")
+    logger.info("=" * 50)
+    photo = None
+    try:
+        from content_generator.photo_service import fetch_photo
+
+        keywords = getattr(post, "photo_keywords", [])
+        if keywords:
+            photo = fetch_photo(keywords)
+            if photo:
+                logger.info("Stock photo fetched successfully")
+            else:
+                logger.info("No photo available, will use gradient fallback")
+        else:
+            logger.info("No photo keywords, will use gradient fallback")
+    except Exception as e:
+        logger.warning("Photo fetch failed (non-critical): %s", e)
+
     # Stage 3: Render image
     logger.info("=" * 50)
     logger.info("Stage 3: Rendering branded image")
     logger.info("=" * 50)
     try:
-        image_path = render_image(post)
+        image_path = render_image(post, photo=photo)
         logger.info("Image saved: %s", image_path)
     except Exception as e:
         logger.error("Stage 3 FAILED - Render: %s", e)

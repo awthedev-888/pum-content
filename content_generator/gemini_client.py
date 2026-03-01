@@ -13,6 +13,22 @@ from content_generator.schemas import GeneratedPost
 from content_generator.prompts import SYSTEM_INSTRUCTION
 
 
+def _clean_schema(schema: dict) -> dict:
+    """Remove additionalProperties from a JSON schema recursively.
+
+    Gemini API does not support additionalProperties in schemas.
+    """
+    schema.pop("additionalProperties", None)
+    for value in schema.values():
+        if isinstance(value, dict):
+            _clean_schema(value)
+        elif isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict):
+                    _clean_schema(item)
+    return schema
+
+
 def create_gemini_client() -> genai.Client:
     """Create Gemini API client from environment variable.
 
@@ -36,7 +52,7 @@ def generate_content(
     prompt: str,
     model: str = "gemini-2.5-flash",
     temperature: float = 0.7,
-    max_output_tokens: int = 2048,
+    max_output_tokens: int = 4096,
 ) -> GeneratedPost:
     """Generate structured Instagram content using Gemini.
 
@@ -61,7 +77,7 @@ def generate_content(
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_INSTRUCTION,
                 response_mime_type="application/json",
-                response_schema=GeneratedPost,
+                response_schema=_clean_schema(GeneratedPost.model_json_schema()),
                 temperature=temperature,
                 max_output_tokens=max_output_tokens,
             ),

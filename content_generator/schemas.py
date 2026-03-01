@@ -8,6 +8,8 @@ after generation to ensure compatibility with Phase 2 template render()
 contracts.
 """
 
+from typing import Optional, List
+
 from pydantic import BaseModel, Field
 
 
@@ -28,6 +30,10 @@ class QuoteStoryData(BaseModel):
     headline: str = Field(
         description="Short attention-grabbing headline in Bahasa Indonesia, max 60 chars"
     )
+    headline_short: Optional[str] = Field(
+        None,
+        description="Very short headline for image overlay (2-4 words/line, max 3 lines, use \\n for line breaks)"
+    )
     body: str = Field(
         description="2-4 sentence story or testimonial in Bahasa Indonesia"
     )
@@ -42,6 +48,10 @@ class TipsListData(BaseModel):
     title: str = Field(
         description="List title in Bahasa Indonesia, e.g. '5 Tips Ekspor untuk UMKM'"
     )
+    headline_short: Optional[str] = Field(
+        None,
+        description="Very short headline for image overlay (2-4 words/line, max 3 lines, use \\n for line breaks)"
+    )
     items: list[str] = Field(
         description="3-5 actionable tips in Bahasa Indonesia"
     )
@@ -53,8 +63,42 @@ class ImpactStatsData(BaseModel):
     title: str = Field(
         description="Stats title in Bahasa Indonesia, e.g. 'Dampak PUM di Indonesia'"
     )
+    headline_short: Optional[str] = Field(
+        None,
+        description="Very short headline for image overlay (2-4 words/line, max 3 lines, use \\n for line breaks)"
+    )
     stats: list[StatItem] = Field(
         description="1-3 impact statistics with number and label"
+    )
+
+
+class TemplateData(BaseModel):
+    """Union of all template fields. Gemini fills the relevant ones based on template_type."""
+
+    # Shared field for 3-zone layout
+    headline_short: Optional[str] = Field(
+        None, description="Very short headline for image overlay (2-4 words/line, max 3 lines, use \\n for line breaks)"
+    )
+    # QuoteStory fields
+    headline: Optional[str] = Field(
+        None, description="Short headline in Bahasa Indonesia, max 60 chars (quote_story)"
+    )
+    body: Optional[str] = Field(
+        None, description="2-4 sentence story in Bahasa Indonesia (quote_story)"
+    )
+    attribution: Optional[str] = Field(
+        None, description="Attribution line, e.g. '--- Name, Title' (quote_story)"
+    )
+    # TipsList fields
+    title: Optional[str] = Field(
+        None, description="List or stats title in Bahasa Indonesia (tips_list / impact_stats)"
+    )
+    items: Optional[List[str]] = Field(
+        None, description="3-5 actionable tips in Bahasa Indonesia (tips_list)"
+    )
+    # ImpactStats fields
+    stats: Optional[List[StatItem]] = Field(
+        None, description="1-3 impact statistics with number and label (impact_stats)"
     )
 
 
@@ -62,7 +106,7 @@ class GeneratedPost(BaseModel):
     """Complete structured output from Gemini for one Instagram post.
 
     This is the top-level response schema passed to Gemini's response_schema
-    parameter. The template_data field contains a dict that matches the
+    parameter. The template_data field contains fields matching the
     render() contract of the template specified by template_type.
     """
 
@@ -72,8 +116,8 @@ class GeneratedPost(BaseModel):
     template_type: str = Field(
         description="Template type: quote_story, tips_list, or impact_stats"
     )
-    template_data: dict = Field(
-        description="Data dict matching the template's render() contract"
+    template_data: TemplateData = Field(
+        description="Template fields matching the template_type's render() contract"
     )
     caption_id: str = Field(
         description="Full Instagram caption in Bahasa Indonesia (150-300 words)"
@@ -86,6 +130,14 @@ class GeneratedPost(BaseModel):
     )
     posting_suggestion: str = Field(
         description="Suggested posting time and content theme note"
+    )
+    cta_text: str = Field(
+        default="TOGETHER WE GROW",
+        description="CTA banner text (2-5 words, English, ALL CAPS), e.g. 'READ THE WHOLE STORY', 'SHARING KNOWLEDGE'"
+    )
+    photo_keywords: list[str] = Field(
+        default_factory=list,
+        description="3-5 English keywords for stock photo search, e.g. ['indonesia', 'farmer', 'agriculture']"
     )
 
 

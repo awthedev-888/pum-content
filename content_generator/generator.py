@@ -94,7 +94,8 @@ def generate_post(
         )
 
     # 6. Output validation
-    validated_data = validate_template_data(result.template_type, result.template_data)
+    template_dict = result.template_data.model_dump(exclude_none=True)
+    validated_data = validate_template_data(result.template_type, template_dict)
     result = result.model_copy(update={"template_data": validated_data})
 
     # 7. Logging
