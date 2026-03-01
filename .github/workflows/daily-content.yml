@@ -1,0 +1,47 @@
+# Daily Content Pipeline for PUM Indonesia Instagram
+# Generates branded bilingual content and emails it for review
+#
+# Required repository secrets (Settings > Secrets and variables > Actions):
+#   GEMINI_API_KEY      - Google Gemini API key
+#   GMAIL_ADDRESS       - Gmail address for sending emails
+#   GMAIL_APP_PASSWORD  - Gmail App Password (16 chars, no spaces)
+#   RECIPIENT_EMAIL     - Email address to receive daily posts
+#   GSHEET_CREDENTIALS  - Google service account JSON (optional)
+#   GOOGLE_SHEET_ID     - Google Sheets spreadsheet ID (optional)
+
+name: Daily Content Pipeline
+
+on:
+  schedule:
+    # 00:00 UTC = 07:00 WIB (Western Indonesia Time, UTC+7)
+    # WIB does not observe daylight saving time, offset is always +7
+    - cron: '0 0 * * *'
+  workflow_dispatch:  # Allow manual trigger from GitHub UI
+
+jobs:
+  generate-content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run content pipeline
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          GSHEET_CREDENTIALS: ${{ secrets.GSHEET_CREDENTIALS }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+        run: python main.py
