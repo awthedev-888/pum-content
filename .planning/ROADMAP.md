@@ -8,10 +8,10 @@ Build an automated content pipeline that researches PUM's activities, generates 
 
 - [x] **Phase 1: Foundation & Brand Setup** - Project structure, dependencies, brand config, and assets
 - [x] **Phase 2: Image Template Engine** - Pillow-based branded image generation with 3 templates
-- [ ] **Phase 3: AI Content Generation** - Gemini API integration for research-first bilingual content
-- [ ] **Phase 4: Content Research Sources** - pum.nl scraper, RSS parser, Google Sheets, content brief
+- [x] **Phase 3: AI Content Generation** - Gemini API integration for research-first bilingual content (completed 2026-03-01)
+- [x] **Phase 4: Content Research Sources** - pum.nl scraper, RSS parser, Google Sheets, content brief (completed 2026-03-01)
 - [x] **Phase 5: Email Delivery** - Gmail SMTP with image attachment and formatted caption (completed 2026-03-01)
-- [ ] **Phase 6: Orchestration & CI/CD** - Main pipeline script and GitHub Actions daily cron
+- [x] **Phase 6: Orchestration & CI/CD** - Main pipeline script and GitHub Actions daily cron (completed 2026-03-01)
 
 ## Phase Details
 
@@ -65,7 +65,7 @@ Plans:
 Plans:
 - [x] 03-01: Gemini API client and prompt engineering
 - [x] 03-02: Content pillar rotation and template selection logic
-- [ ] 03-03: Structured output parsing and validation
+- [x] 03-03: Structured output parsing and validation
 
 ### Phase 4: Content Research Sources
 **Goal**: Pipeline can gather real PUM content from multiple sources (website, RSS, Google Sheets, content brief, web search) to feed the AI generator
@@ -81,9 +81,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: pum.nl web scraper + RSS feed parser (Wave 1)
-- [ ] 04-02: Content brief YAML loader + Google Sheets reader (Wave 1)
-- [ ] 04-03: Gemini web search + source aggregator + integration tests (Wave 2)
+- [x] 04-01: pum.nl web scraper + RSS feed parser (Wave 1)
+- [x] 04-02: Content brief YAML loader + Google Sheets reader (Wave 1)
+- [x] 04-03: Gemini web search + source aggregator + integration tests (Wave 2)
 
 ### Phase 5: Email Delivery
 **Goal**: Generated post (image + caption + hashtags + posting suggestion) is delivered via email ready to copy-paste and post
@@ -98,8 +98,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 05-01: Gmail SMTP client with App Password auth
-- [ ] 05-02: Email template with attachment, caption, and metadata
+- [x] 05-01: Gmail SMTP client with App Password auth
+- [x] 05-02: Email template with attachment, caption, and metadata
 
 ### Phase 6: Orchestration & CI/CD
 **Goal**: Complete pipeline runs end-to-end on a daily GitHub Actions cron, handling errors gracefully
@@ -114,9 +114,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Main orchestrator script (main.py) with 4-stage pipeline (Wave 1)
+- [x] 06-01-PLAN.md — Main orchestrator script (main.py) with 4-stage pipeline (Wave 1)
 - [x] 06-02-PLAN.md — GitHub Actions workflow with daily cron (Wave 1)
-- [ ] 06-03-PLAN.md — Offline test suite for orchestrator (Wave 2)
+- [x] 06-03-PLAN.md — Offline test suite for orchestrator (Wave 2)
 
 ## Progress
 
@@ -127,7 +127,7 @@ Phases 1 first, then 2/3/4 can run in parallel, then 5, then 6.
 |-------|----------------|--------|-----------|
 | 1. Foundation & Brand Setup | 3/3 | Complete | 2026-02-28 |
 | 2. Image Template Engine | 4/4 | Complete | 2026-02-28 |
-| 3. AI Content Generation | 2/3 | In Progress | - |
-| 4. Content Research Sources | 0/4 | Not started | - |
-| 5. Email Delivery | 0/2 | Complete    | 2026-03-01 |
-| 6. Orchestration & CI/CD | 2/3 | In Progress | - |
+| 3. AI Content Generation | 3/3 | Complete | 2026-03-01 |
+| 4. Content Research Sources | 3/3 | Complete | 2026-03-01 |
+| 5. Email Delivery | 2/2 | Complete | 2026-03-01 |
+| 6. Orchestration & CI/CD | 3/3 | Complete | 2026-03-01 |
