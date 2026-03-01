@@ -114,9 +114,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 06-01: Main orchestrator script (main.py)
-- [ ] 06-02: GitHub Actions workflow (daily cron)
-- [ ] 06-03: Error handling, logging, and end-to-end testing
+- [ ] 06-01-PLAN.md — Main orchestrator script (main.py) with 4-stage pipeline (Wave 1)
+- [ ] 06-02-PLAN.md — GitHub Actions workflow with daily cron (Wave 1)
+- [ ] 06-03-PLAN.md — Offline test suite for orchestrator (Wave 2)
 
 ## Progress
 
