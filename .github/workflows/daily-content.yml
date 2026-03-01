@@ -1,4 +1,4 @@
-# Daily Content Pipeline for PUM Indonesia Instagram
+# Content Pipeline for PUM Indonesia Instagram (Mon/Wed/Fri at 19:00 WIB)
 # Generates branded bilingual content and emails it for review
 #
 # Required repository secrets (Settings > Secrets and variables > Actions):
@@ -9,13 +9,13 @@
 #   GSHEET_CREDENTIALS  - Google service account JSON (optional)
 #   GOOGLE_SHEET_ID     - Google Sheets spreadsheet ID (optional)
 
-name: Daily Content Pipeline
+name: Content Pipeline (Mon/Wed/Fri)
 
 on:
   schedule:
-    # 00:00 UTC = 07:00 WIB (Western Indonesia Time, UTC+7)
-    # WIB does not observe daylight saving time, offset is always +7
-    - cron: '0 0 * * *'
+    # 12:00 UTC = 19:00 WIB (Western Indonesia Time, UTC+7)
+    # Runs Monday, Wednesday, Friday only
+    - cron: '0 12 * * 1,3,5'
   workflow_dispatch:  # Allow manual trigger from GitHub UI
 
 jobs:
