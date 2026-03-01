@@ -32,7 +32,7 @@
 
 ### Email Delivery
 
-- [ ] **EMAIL-01**: System sends email with generated post image as attachment
+- [x] **EMAIL-01**: System sends email with generated post image as attachment
 - [ ] **EMAIL-02**: Email body contains ready-to-copy bilingual caption and hashtags
 - [ ] **EMAIL-03**: Email includes posting suggestion (time and content theme)
 
@@ -92,7 +92,7 @@
 | IMG-04 | Phase 2 | Complete |
 | IMG-05 | Phase 2 | Complete |
 | IMG-06 | Phase 2 | Complete |
-| EMAIL-01 | Phase 5 | Pending |
+| EMAIL-01 | Phase 5 | Complete |
 | EMAIL-02 | Phase 5 | Pending |
 | EMAIL-03 | Phase 5 | Pending |
 | INFRA-01 | Phase 6 | Pending |
